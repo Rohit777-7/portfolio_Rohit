@@ -1,85 +1,63 @@
-import React from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
-
-import "react-vertical-timeline-component/style.min.css";
-
-import { styles } from "../styles";
 import { experiences } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { textVariant } from "../utils/motion";
+import { Reveal, SectionHeading } from "./ui/Reveal";
 
-const ExperienceCard = ({ experience }) => {
-  return (
-    <VerticalTimelineElement
-      contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
-      }}
-      contentArrowStyle={{ borderRight: "7px solid  #232631" }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
-      icon={
-        <div className='flex justify-center items-center w-full h-full'>
-          <img
-            src={experience.icon}
-            alt={experience.company_name}
-            className='w-[60%] h-[60%] object-contain'
-          />
-        </div>
-      }
-    >
-      <div>
-        <h3 className='text-white text-[24px] font-bold'>{experience.title}</h3>
-        <p
-          className='text-secondary text-[16px] font-semibold'
-          style={{ margin: 0 }}
-        >
-          {experience.company_name}
-        </p>
-      </div>
+const Experience = () => (
+  <section id="experience" className="container-site py-20 sm:py-28">
+    <SectionHeading index="02" eyebrow="Experience" title="Where I'm" accent="building." />
 
-      <ul className='mt-5 list-disc ml-5 space-y-2'>
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] pl-1 tracking-wider'
-          >
-            {point}
-          </li>
-        ))}
-      </ul>
-    </VerticalTimelineElement>
-  );
-};
+    <div className="mt-16 space-y-6">
+      {experiences.map((exp) => (
+        <Reveal key={exp.company}>
+          <article className="relative overflow-hidden rounded-3xl border border-line bg-surface">
+            <div className="grid gap-10 p-7 sm:p-10 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-16">
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-3">
+                  {exp.current && (
+                    <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-ink">
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink" />
+                      Current
+                    </span>
+                  )}
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted">{exp.period}</span>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-medium tracking-tight sm:text-4xl">{exp.company}</h3>
+                  <p className="mt-2 font-serif text-xl italic text-accent">{exp.role}</p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {exp.stack.map((t) => (
+                    <span key={t} className="chip">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-const Experience = () => {
-  return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-center`}>
-          What I have done so far
-        </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>
-          Work Experience.
-        </h2>
-      </motion.div>
+              <div>
+                <p className="text-lg leading-relaxed text-fg">{exp.summary}</p>
+                <ul className="mt-8 divide-y divide-line border-t border-line">
+                  {exp.points.map((p, i) => (
+                    <motion.li
+                      key={i}
+                      className="flex gap-5 py-5 text-[15px] leading-relaxed text-muted"
+                      initial={{ opacity: 0, x: -12 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 + i * 0.08, duration: 0.6 }}
+                    >
+                      <span className="pt-1 font-mono text-[11px] text-accent">0{i + 1}</span>
+                      <span>{p}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  </section>
+);
 
-      <div className='mt-20 flex flex-col'>
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
-            />
-          ))}
-        </VerticalTimeline>
-      </div>
-    </>
-  );
-};
-
-export default SectionWrapper(Experience, "work");
+export default Experience;

@@ -1,266 +1,184 @@
-import {
-  mobile,
-  backend,
-  creator,
-  web,
-  javascript,
-  typescript,
-  html,
-  css,
-  reactjs,
-  redux,
-  tailwind,
-  nodejs,
-  mongodb,
-  git,
-  figma,
-  docker,
-  meta,
-  starbucks,
-  tesla,
-  shopify,
-  carrent,
-  jobit,
-  tripguide,
-  threejs,
-} from "../assets";
+import sixty3 from "../assets/projects/sixty3.jpg";
+import jpInfra from "../assets/projects/jp-infra.jpg";
+import rideflow from "../assets/projects/rideflow.jpg";
+import bookstore from "../assets/projects/bookstore.jpg";
+
+// ─────────────────────────────────────────────────────────────
+//  Everything on the site is driven from this file.
+//  Edit text, links and projects here — no component changes needed.
+// ─────────────────────────────────────────────────────────────
+
+export const profile = {
+  name: "Rohitkumar Yadav",
+  firstName: "Rohit",
+  role: "Creative Frontend Developer",
+  company: "Brainwing Innovations",
+  location: "India",
+  timezone: "Asia/Kolkata",
+  email: "rohityadavit45@gmail.com",
+  available: true,
+  mernYears: 2,
+  heroStats: [
+    { value: "2+", label: "Years MERN" },
+    { value: "4", label: "Live projects" },
+  ],
+  // Optional: drop a PDF into /public and set e.g. "/Rohitkumar-Yadav-Resume.pdf"
+  resume: "",
+};
+
+export const socials = [
+  { label: "GitHub", href: "https://github.com/Rohit777-7" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/rohitkumar-yadav7" },
+].filter((s) => s.href);
 
 export const navLinks = [
+  { id: "about", title: "About" },
+  { id: "experience", title: "Experience" },
+  { id: "work", title: "Work" },
+  { id: "contact", title: "Contact" },
+];
+
+export const stats = [
+  { value: 2, suffix: "+", label: "Years hands-on with the MERN stack" },
+  { value: 4, suffix: "+", label: "Months building in production" },
+  { value: 4, suffix: "", label: "Live projects shipped" },
+  { value: 2, suffix: "", label: "Real-estate client launches" },
+];
+
+export const stack = [
+  "React",
+  "Next.js",
+  "JavaScript",
+  "TypeScript",
+  "GSAP",
+  "ScrollTrigger",
+  "Framer Motion",
+  "Three.js",
+  "Tailwind CSS",
+  "Node.js",
+  "Express",
+  "MongoDB",
+  "REST APIs",
+  "Socket.IO",
+  "MapLibre",
+  "Figma",
+  "Git",
+  "Vercel",
+];
+
+export const capabilities = [
   {
-    id: "about",
-    title: "About",
+    title: "Motion & interaction",
+    body: "Scroll-driven storytelling, page transitions and micro-interactions with GSAP, ScrollTrigger and Framer Motion.",
+    tags: ["GSAP", "ScrollTrigger", "Framer Motion"],
   },
   {
-    id: "project",
-    title: "Work",
+    title: "Immersive web",
+    body: "360° tours, interactive floor pickers, live maps and WebGL touches that make a site feel like a product.",
+    tags: ["Three.js", "360° tours", "MapLibre"],
   },
   {
-    id: "contact",
-    title: "Contact",
+    title: "Pixel-perfect builds",
+    body: "Designs translated faithfully into fast, responsive and accessible interfaces.",
+    tags: ["Tailwind", "Figma", "Performance"],
+  },
+  {
+    title: "Full-stack MERN",
+    body: "2+ years of hands-on MERN: REST APIs with Node and Express, MongoDB data models, auth, carts and orders, wired to React frontends with real-time updates over WebSockets.",
+    tags: ["MongoDB", "Express", "React", "Node.js", "Socket.IO"],
   },
 ];
 
-const services = [
+export const experiences = [
   {
-    title: "Web Developer",
-    icon: web,
-  },
-  {
-    title: "Frontend Developer",
-    icon: mobile,
-  },
-  {
-    title: "Backend Developer",
-    icon: backend,
-  },
-  {
-    title: "Content Creator",
-    icon: creator,
-  },
-];
-
-const technologies = [
-  {
-    name: "HTML 5",
-    icon: html,
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
-  },
-];
-
-const experiences = [
-  {
-    title: "React.js Developer",
-    company_name: "Starbucks",
-    icon: starbucks,
-    iconBg: "#383E56",
-    date: "March 2020 - April 2021",
+    company: "Brainwing Innovations",
+    role: "Creative Frontend Developer",
+    period: "Jul 2026 — Present",
+    current: true,
+    summary:
+      "Building cinematic launch websites for real-estate developers: interactive, motion-first experiences that let buyers explore a project before it is built.",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Built the SIXTY3 W.E. Residences site with an interactive tower: pick any floor to open its plan or the view from that height.",
+      "Worked on a 360° virtual tour and a commute map with live routing for the same project.",
+      "Built Codename Endgame for JP Infra: a fly-through-the-clouds intro and scroll-driven storytelling with GSAP ScrollTrigger.",
+      "Turn designs into responsive, high-performance React interfaces and tune animations to run smoothly on mobile.",
     ],
+    stack: ["React", "GSAP", "ScrollTrigger", "MapLibre", "360° tours"],
   },
   {
-    title: "Frontend Developer",
-    company_name: "Tesla",
-    icon: tesla,
-    iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
+    company: "Full-stack projects",
+    role: "MERN Stack Developer",
+    period: "2+ years hands-on",
+    current: false,
+    summary:
+      "Building complete web apps end to end with MongoDB, Express, React and Node.js, from database design and APIs to polished, responsive frontends.",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Built RideFlow, a real-time ride-booking platform with separate rider and driver apps kept in sync over WebSockets.",
+      "Built a full bookstore with catalogue, search, wishlist, cart and orders backed by MongoDB.",
+      "Designed REST APIs with Node and Express, including authentication and role-based flows.",
+      "Deployed and maintained apps on Vercel with a focus on clean, reusable code.",
     ],
-  },
-  {
-    title: "Web Developer",
-    company_name: "Shopify",
-    icon: shopify,
-    iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
-    iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
+    stack: ["MongoDB", "Express", "React", "Node.js", "Socket.IO", "Next.js"],
   },
 ];
 
-const testimonials = [
+export const projects = [
   {
-    testimonial:
-      "Strong understanding of React.js, modern frontend development, and responsive UI design.",
-    name: "Strong Development Skills",
-    designation: "",
-    company: "",
-    image: "",
+    slug: "sixty3",
+    title: "SIXTY3 W.E. Residences",
+    kind: "client",
+    client: "Brainwing · Client",
+    year: "2026",
+    blurb:
+      "Interactive launch site for a luxury tower in Goregaon (E), Mumbai. Pick a floor on the tower to open its plan or the view from that height, take a 360° tour, and check commute times on a live map.",
+    highlights: ["Floor-picker tower", "360° virtual tour", "Live commute routing"],
+    tags: ["React", "GSAP", "MapLibre", "360°"],
+    image: sixty3,
+    live: "https://sixty3-brainwing.vercel.app/",
+    accent: "#c9a86a",
   },
   {
-    testimonial:
-      "Quick learner who adapts fast to new tools and technologies — ensuring faster delivery.",
-    name: "Fast Learner",
-    designation: "",
-    company: "",
-    image: "",
+    slug: "endgame",
+    title: "Codename Endgame",
+    kind: "client",
+    client: "JP Infra · via Brainwing",
+    year: "2026",
+    blurb:
+      "Cinematic launch experience for JP Infra's North Garden City: a fly-through-the-clouds intro, scroll-driven storytelling and a 360° world to explore the spaces.",
+    highlights: ["Cinematic intro", "Scroll storytelling", "360° world"],
+    tags: ["React", "GSAP", "ScrollTrigger"],
+    image: jpInfra,
+    live: "https://jp-infra-brainwing.vercel.app/",
+    accent: "#e8c9a0",
   },
   {
-    testimonial:
-      "I focus on creating clean, user-friendly, and accessible interfaces that solve real problems.",
-    name: "Clean & Responsive UI",
-    designation: "",
-    company: "",
-    image: "",
-  },
-];
-
-
-const projects = [
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "mongodb",
-        color: "green-text-gradient",
-      },
-      {
-        name: "tailwind",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: carrent,
-    source_code_link: "https://github.com/Rohit777-7",
+    slug: "rideflow",
+    title: "RideFlow",
+    kind: "personal",
+    client: "Personal project",
+    year: "2026",
+    blurb:
+      "Real-time ride-booking platform with separate rider and driver apps. Bikes, autos and cabs on a live map, PIN-verified pickups, upfront fares, wallet, in-trip chat and SOS, all synced over WebSockets.",
+    highlights: ["Rider + driver apps", "Live map tracking", "Real-time over WebSockets"],
+    tags: ["React", "Socket.IO", "MapLibre", "GSAP"],
+    image: rideflow,
+    live: "https://smart-ride-rohit.vercel.app/",
+    code: "",
+    accent: "#3b82f6",
   },
   {
-    name: "Bookstore Application",
-    description:
-      "Web application that allows users to browse books, read free content, purchase paid titles, and securely manage their accounts with a smooth and responsive interface.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "restapi",
-        color: "green-text-gradient",
-      },
-      {
-        name: "scss",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: "/Bookstore.png",
-    source_code_link: "https://github.com/Rohit777-7",
-  },
-  {
-    name: "Gym Application",
-    description:
-      "A comprehensive fitness platform that allows users to track workouts, calculate BMI, access personalized diet and exercise plans, and manage their health progress with secure authentication.",
-    tags: [
-      {
-        name: "nextjs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "supabase",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: "/Gym.png",
-    source_code_link: "https://github.com/Rohit777-7",
+    slug: "bookstore",
+    title: "Book Store",
+    kind: "personal",
+    client: "Personal project",
+    year: "2026",
+    blurb:
+      "Curated online bookstore with weekly trending picks, a deal-of-the-day countdown, wishlist, cart and orders, plus a Ctrl+K search across the catalogue.",
+    highlights: ["Ctrl+K search", "Cart & wishlist", "Deal countdown"],
+    tags: ["Next.js", "React", "MongoDB"],
+    image: bookstore,
+    live: "https://bookstore-application-2026.vercel.app/",
+    code: "",
+    accent: "#d4a85a",
   },
 ];
-
-export { services, technologies, experiences, testimonials, projects };

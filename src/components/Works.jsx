@@ -1,100 +1,187 @@
-import React from "react";
-import Tilt from "react-parallax-tilt";
-import { motion } from "framer-motion";
-
-import { styles } from "../styles";
-import { github } from "../assets";
-import { SectionWrapper } from "../hoc";
+import { forwardRef, useRef, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import { projects } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
+import { useFinePointer } from "../lib/hooks";
+import { Reveal, SectionHeading } from "./ui/Reveal";
 
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
-}) => {
+const filters = [
+  { id: "all", label: "All" },
+  { id: "client", label: "Client work" },
+  { id: "personal", label: "Personal" },
+];
+
+/** Screenshot in a browser frame with 3D tilt + scroll parallax. */
+const Preview = ({ project }) => {
+  const ref = useRef(null);
+  const fine = useFinePointer();
+  const rx = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 });
+  const ry = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+
+  const onMove = (e) => {
+    if (!fine) return;
+    const r = ref.current.getBoundingClientRect();
+    ry.set(((e.clientX - r.left) / r.width - 0.5) * 8);
+    rx.set(-((e.clientY - r.top) / r.height - 0.5) * 8);
+  };
+  const reset = () => {
+    rx.set(0);
+    ry.set(0);
+  };
+
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
-      <Tilt
-  tiltMaxAngleX={45}
-  tiltMaxAngleY={45}
-  scale={1}
-  transitionSpeed={450}
-  className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
->
-
-        <div className='relative w-full h-[230px]'>
-          <img
-            src={image}
-            alt='project_image'
-            className='w-full h-full object-cover rounded-2xl'
+    <a
+      ref={ref}
+      href={project.live}
+      target="_blank"
+      rel="noreferrer"
+      data-cursor="Visit ↗"
+      onMouseMove={onMove}
+      onMouseLeave={reset}
+      className="group block [perspective:1200px]"
+      aria-label={`Open ${project.title} live site`}
+    >
+      <motion.div
+        style={{ rotateX: rx, rotateY: ry }}
+        className="relative overflow-hidden rounded-2xl border border-line bg-raised shadow-2xl shadow-black/50 [transform-style:preserve-3d]"
+      >
+        <div className="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-3">
+          <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+          <span className="ml-3 truncate rounded-md bg-white/5 px-3 py-1 font-mono text-[10px] text-muted">
+            {project.live.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+          </span>
+        </div>
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <motion.div style={{ y: imgY }} className="absolute inset-x-0 -top-[6%] h-[112%]">
+            <img
+              src={project.image}
+              alt={`${project.title} homepage`}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+            />
+          </motion.div>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-0 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-100"
+            style={{ background: `radial-gradient(circle at 30% 20%, ${project.accent}, transparent 60%)` }}
           />
+        </div>
+      </motion.div>
+    </a>
+  );
+};
 
-          <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className='black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
-            >
-              <img
-                src={github}
-                alt='source code'
-                className='w-1/2 h-1/2 object-contain'
-              />
-            </div>
-          </div>
+const ProjectRow = forwardRef(({ project, index }, ref) => {
+  const flip = index % 2 === 1;
+  return (
+    <motion.article
+      ref={ref}
+      layout
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="grid items-center gap-8 border-t border-line pt-10 lg:grid-cols-12 lg:gap-14"
+    >
+      <div className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
+        <Preview project={project} />
+      </div>
+
+      <div className={`flex flex-col lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
+        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-muted">
+          <span>
+            <span className="text-accent">{String(index + 1).padStart(2, "0")}</span> / {project.client}
+          </span>
+          <span>{project.year}</span>
         </div>
 
-        <div className='mt-5'>
-          <h3 className='text-white font-bold text-[24px]'>{name}</h3>
-          <p className='mt-2 text-secondary text-[14px]'>{description}</p>
-        </div>
+        <h3 className="mt-6 text-[clamp(2rem,4vw,3.25rem)] font-medium leading-none tracking-tightest">
+          {project.title}
+        </h3>
+        <p className="mt-5 text-[15px] leading-relaxed text-muted">{project.blurb}</p>
 
-        <div className='mt-4 flex flex-wrap gap-2'>
-          {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
+        <ul className="mt-6 space-y-2">
+          {project.highlights.map((h) => (
+            <li key={h} className="flex items-center gap-3 text-sm text-fg">
+              <span className="h-px w-4 bg-accent" />
+              {h}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex flex-wrap gap-2">
+          {project.tags.map((t) => (
+            <span key={t} className="chip">
+              {t}
+            </span>
           ))}
         </div>
-      </Tilt>
-    </motion.div>
+
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href={project.live} target="_blank" rel="noreferrer" className="btn-primary group !py-3">
+            Live site
+            <span className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+          </a>
+          {project.code && (
+            <a href={project.code} target="_blank" rel="noreferrer" className="btn-ghost !py-3">
+              Source code
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
   );
-};
+});
+ProjectRow.displayName = "ProjectRow";
 
 const Works = () => {
+  const [filter, setFilter] = useState("all");
+  const list = projects.filter((p) => filter === "all" || p.kind === filter);
+
   return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+    <section id="work" className="container-site py-20 sm:py-28">
+      <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
+        <SectionHeading index="03" eyebrow="Selected work" title="Things I've" accent="shipped." />
+        <Reveal className="flex gap-1 self-start rounded-full border border-line p-1 lg:self-auto" >
+          {filters.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setFilter(f.id)}
+              className={`relative rounded-full px-4 py-2 text-sm transition-colors ${
+                filter === f.id ? "text-ink" : "text-muted hover:text-fg"
+              }`}
+              aria-pressed={filter === f.id}
+            >
+              {filter === f.id && (
+                <motion.span
+                  layoutId="filter-pill"
+                  className="absolute inset-0 rounded-full bg-accent"
+                  transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                />
+              )}
+              <span className="relative">
+                {f.label}
+                <span className="ml-1.5 font-mono text-[10px] opacity-60">
+                  {f.id === "all" ? projects.length : projects.filter((p) => p.kind === f.id).length}
+                </span>
+              </span>
+            </button>
+          ))}
+        </Reveal>
+      </div>
+
+      <motion.div layout className="mt-16 space-y-20 sm:space-y-28">
+        <AnimatePresence mode="popLayout" initial={false}>
+          {list.map((p, i) => (
+            <ProjectRow key={p.slug} project={p} index={i} />
+          ))}
+        </AnimatePresence>
       </motion.div>
-
-      <div className='w-full flex'>
-        <motion.p
-          variants={fadeIn("", "", 0.1, 1)}
-          className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
-        >
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to code repositories and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
-        </motion.p>
-      </div>
-
-      <div className='mt-20 flex flex-wrap gap-7'>
-        {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
-        ))}
-      </div>
-    </>
+    </section>
   );
 };
 
-export default SectionWrapper(Works, "project");
+export default Works;
