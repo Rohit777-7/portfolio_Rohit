@@ -19,9 +19,11 @@ module.exports = {
       },
       screens: {
         xs: "450px",
+        // Phones held sideways: wide but very short
+        short: { raw: "(max-height: 520px) and (orientation: landscape)" },
       },
       maxWidth: {
-        site: "1320px",
+        site: "82.5rem", // 1320px at the default size; scales up on large screens
       },
       letterSpacing: {
         tightest: "-0.05em",

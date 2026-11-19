@@ -14,12 +14,12 @@ const Experience = () => (
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-3">
                   {exp.current && (
-                    <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-ink">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-accent px-3 py-1 font-mono text-[0.625rem] uppercase tracking-wider text-ink">
                       <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink" />
                       Current
                     </span>
                   )}
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted">{exp.period}</span>
+                  <span className="font-mono text-[0.6875rem] uppercase tracking-wider text-muted">{exp.period}</span>
                 </div>
                 <div>
                   <h3 className="text-3xl font-medium tracking-tight sm:text-4xl">{exp.company}</h3>
@@ -40,13 +40,13 @@ const Experience = () => (
                   {exp.points.map((p, i) => (
                     <motion.li
                       key={i}
-                      className="flex gap-5 py-5 text-[15px] leading-relaxed text-muted"
+                      className="flex gap-5 py-5 text-[0.9375rem] leading-relaxed text-muted"
                       initial={{ opacity: 0, x: -12 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 + i * 0.08, duration: 0.6 }}
                     >
-                      <span className="pt-1 font-mono text-[11px] text-accent">0{i + 1}</span>
+                      <span className="pt-1 font-mono text-[0.6875rem] text-accent">0{i + 1}</span>
                       <span>{p}</span>
                     </motion.li>
                   ))}

@@ -125,10 +125,10 @@ const CommandPalette = ({ open, setOpen, onToast }) => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onKeyDown}
                 placeholder="Type a command or search…"
-                className="h-14 w-full bg-transparent text-[15px] text-fg outline-none placeholder:text-muted"
+                className="h-14 w-full bg-transparent text-[0.9375rem] text-fg outline-none placeholder:text-muted"
                 aria-label="Search commands"
               />
-              <kbd className="rounded border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted">ESC</kbd>
+              <kbd className="rounded border border-line px-1.5 py-0.5 font-mono text-[0.625rem] text-muted">ESC</kbd>
             </div>
 
             <ul ref={listRef} className="max-h-[50vh] overflow-y-auto p-2" data-lenis-prevent role="listbox">
@@ -138,7 +138,7 @@ const CommandPalette = ({ open, setOpen, onToast }) => {
                 lastGroup = item.group;
                 return (
                   <li key={item.label}>
-                    {header && <p className="px-3 pb-1 pt-3 eyebrow !text-[10px]">{item.group}</p>}
+                    {header && <p className="px-3 pb-1 pt-3 eyebrow !text-[0.625rem]">{item.group}</p>}
                     <button
                       data-idx={i}
                       role="option"
@@ -150,14 +150,14 @@ const CommandPalette = ({ open, setOpen, onToast }) => {
                       }`}
                     >
                       <span>{item.label}</span>
-                      {item.hint && <span className="truncate pl-4 font-mono text-[11px] text-muted">{item.hint}</span>}
+                      {item.hint && <span className="truncate pl-4 font-mono text-[0.6875rem] text-muted">{item.hint}</span>}
                     </button>
                   </li>
                 );
               })}
             </ul>
 
-            <div className="flex items-center gap-4 border-t border-line px-5 py-3 font-mono text-[10px] text-muted">
+            <div className="flex items-center gap-4 border-t border-line px-5 py-3 font-mono text-[0.625rem] text-muted">
               <span>↑↓ navigate</span>
               <span>↵ select</span>
               <span className="ml-auto">esc close</span>

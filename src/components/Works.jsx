@@ -50,7 +50,7 @@ const Preview = ({ project }) => {
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-          <span className="ml-3 truncate rounded-md bg-white/5 px-3 py-1 font-mono text-[10px] text-muted">
+          <span className="ml-3 truncate rounded-md bg-white/5 px-3 py-1 font-mono text-[0.625rem] text-muted">
             {project.live.replace(/^https?:\/\//, "").replace(/\/$/, "")}
           </span>
         </div>
@@ -84,14 +84,14 @@ const ProjectRow = forwardRef(({ project, index }, ref) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="grid items-center gap-8 border-t border-line pt-10 lg:grid-cols-12 lg:gap-14"
+      className="grid items-center gap-8 border-t border-line pt-10 short:grid-cols-12 short:gap-8 lg:grid-cols-12 lg:gap-14"
     >
-      <div className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}>
+      <div className={`short:col-span-6 lg:col-span-7 ${flip ? "short:order-2 lg:order-2" : ""}`}>
         <Preview project={project} />
       </div>
 
-      <div className={`flex flex-col lg:col-span-5 ${flip ? "lg:order-1" : ""}`}>
-        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-muted">
+      <div className={`flex flex-col short:col-span-6 lg:col-span-5 ${flip ? "short:order-1 lg:order-1" : ""}`}>
+        <div className="flex items-center justify-between font-mono text-[0.6875rem] uppercase tracking-wider text-muted">
           <span>
             <span className="text-accent">{String(index + 1).padStart(2, "0")}</span> / {project.client}
           </span>
@@ -101,7 +101,7 @@ const ProjectRow = forwardRef(({ project, index }, ref) => {
         <h3 className="mt-6 text-[clamp(2rem,4vw,3.25rem)] font-medium leading-none tracking-tightest">
           {project.title}
         </h3>
-        <p className="mt-5 text-[15px] leading-relaxed text-muted">{project.blurb}</p>
+        <p className="mt-5 text-[0.9375rem] leading-relaxed text-muted">{project.blurb}</p>
 
         <ul className="mt-6 space-y-2">
           {project.highlights.map((h) => (
@@ -164,7 +164,7 @@ const Works = () => {
               )}
               <span className="relative">
                 {f.label}
-                <span className="ml-1.5 font-mono text-[10px] opacity-60">
+                <span className="ml-1.5 font-mono text-[0.625rem] opacity-60">
                   {f.id === "all" ? projects.length : projects.filter((p) => p.kind === f.id).length}
                 </span>
               </span>

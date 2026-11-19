@@ -67,7 +67,7 @@ const Cursor = () => {
           style={{ width: size, height: size }}
         >
           <span
-            className={`font-mono text-[10px] uppercase tracking-wider text-ink transition-opacity duration-200 ${
+            className={`font-mono text-[0.625rem] uppercase tracking-wider text-ink transition-opacity duration-200 ${
               label ? "opacity-100" : "opacity-0"
             }`}
           >

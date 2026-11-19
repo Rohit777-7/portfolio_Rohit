@@ -55,7 +55,7 @@ export const SplitWords = ({ text, className = "", delay = 0, stagger = 0.06, an
 export const SectionHeading = ({ index, eyebrow, title, accent, className = "" }) => (
   <div className={`flex flex-col gap-5 ${className}`}>
     <Reveal className="flex items-center gap-3">
-      <span className="font-mono text-[11px] text-accent">{index}</span>
+      <span className="font-mono text-[0.6875rem] text-accent">{index}</span>
       <span className="h-px w-10 bg-line" />
       <span className="eyebrow">{eyebrow}</span>
     </Reveal>

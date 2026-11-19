@@ -15,11 +15,11 @@ const Footer = () => {
           </p>
         </div>
         <div>
-          <p className="eyebrow mb-3">Menu</p>
-          <ul className="space-y-1.5 text-sm">
+          <p className="eyebrow mb-2">Menu</p>
+          <ul className="text-sm">
             {navLinks.map((l) => (
               <li key={l.id}>
-                <button onClick={() => scrollToId(l.id)} className="text-muted transition-colors hover:text-fg">
+                <button onClick={() => scrollToId(l.id)} className="inline-flex min-h-[2rem] items-center text-muted transition-colors hover:text-fg">
                   {l.title}
                 </button>
               </li>
@@ -27,17 +27,17 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <p className="eyebrow mb-3">Socials</p>
-          <ul className="space-y-1.5 text-sm">
+          <p className="eyebrow mb-2">Socials</p>
+          <ul className="text-sm">
             {socials.map((s) => (
               <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noreferrer" className="text-muted transition-colors hover:text-fg">
+                <a href={s.href} target="_blank" rel="noreferrer" className="inline-flex min-h-[2rem] items-center text-muted transition-colors hover:text-fg">
                   {s.label} ↗
                 </a>
               </li>
             ))}
             <li>
-              <a href={`mailto:${profile.email}`} className="text-muted transition-colors hover:text-fg">
+              <a href={`mailto:${profile.email}`} className="inline-flex min-h-[2rem] items-center text-muted transition-colors hover:text-fg">
                 Email ↗
               </a>
             </li>
@@ -48,16 +48,16 @@ const Footer = () => {
       <div className="container-site overflow-hidden">
         <p
           aria-hidden
-          className="select-none whitespace-nowrap text-center text-[15.5vw] font-semibold leading-[0.8] tracking-tightest text-white/[0.04] lg:text-[13.2rem]"
+          className="select-none whitespace-nowrap text-center text-[min(14.5vw,13rem)] font-semibold leading-[0.8] tracking-tightest text-white/[0.04]"
         >
           {profile.firstName.toUpperCase()} YADAV
         </p>
       </div>
 
-      <div className="container-site flex flex-col items-center justify-between gap-3 border-t border-line py-6 font-mono text-[11px] uppercase tracking-wider text-muted sm:flex-row">
+      <div className="container-site flex flex-col items-center justify-between gap-3 border-t border-line py-6 font-mono text-[0.6875rem] uppercase tracking-wider text-muted sm:flex-row">
         <span>© {new Date().getFullYear()} {profile.name}</span>
         <span>Designed & built by me</span>
-        <button onClick={() => scrollToId("top")} className="transition-colors hover:text-accent">
+        <button onClick={() => scrollToId("top")} className="-my-2 inline-flex min-h-[2rem] items-center py-2 transition-colors hover:text-accent">
           Back to top ↑
         </button>
       </div>

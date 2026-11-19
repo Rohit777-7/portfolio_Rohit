@@ -89,7 +89,7 @@ const About = () => (
         <Reveal key={c.title} delay={i * 0.08} className={i === 0 || i === 3 ? "lg:col-span-2" : ""}>
           <SpotlightCard className="flex h-full min-h-[240px] flex-col">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] text-accent">0{i + 1}</span>
+              <span className="font-mono text-[0.6875rem] text-accent">0{i + 1}</span>
               <span className="grid h-8 w-8 place-items-center rounded-full border border-line text-sm text-muted transition-all duration-500 group-hover:rotate-45 group-hover:border-accent group-hover:text-accent">
                 ↗
               </span>

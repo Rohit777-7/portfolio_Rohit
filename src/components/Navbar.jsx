@@ -53,7 +53,7 @@ const Navbar = ({ onOpenPalette }) => {
             className="group flex items-center gap-2.5 text-sm font-medium"
             aria-label="Back to top"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-accent font-serif text-[15px] italic tracking-tight text-ink transition-transform duration-500 group-hover:rotate-[360deg]">
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-accent font-serif text-[0.9375rem] italic tracking-tight text-ink transition-transform duration-500 group-hover:rotate-[360deg]">
               RY
             </span>
             <span className="hidden sm:block">{profile.name}</span>
@@ -116,12 +116,13 @@ const Navbar = ({ onOpenPalette }) => {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink/95 px-4 pb-10 pt-24 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-end overflow-y-auto bg-ink/95 px-4 pb-10 pt-24 backdrop-blur-xl short:justify-start short:px-6 short:pb-6 short:pt-20 md:hidden"
+            data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 short:grid short:grid-cols-2 short:gap-x-8 short:gap-y-0">
               {navLinks.map((l, i) => (
                 <motion.li
                   key={l.id}
@@ -131,7 +132,7 @@ const Navbar = ({ onOpenPalette }) => {
                 >
                   <button
                     onClick={() => go(l.id)}
-                    className="flex w-full items-baseline justify-between border-b border-line py-4 text-left text-4xl font-medium tracking-tightest"
+                    className="flex w-full items-baseline justify-between border-b border-line py-4 text-left text-4xl font-medium tracking-tightest short:py-3 short:text-2xl"
                   >
                     {l.title}
                     <span className="font-mono text-xs text-muted">0{i + 1}</span>
@@ -139,7 +140,7 @@ const Navbar = ({ onOpenPalette }) => {
                 </motion.li>
               ))}
             </ul>
-            <button onClick={() => { setOpen(false); onOpenPalette(); }} className="btn-ghost mt-8 w-full">
+            <button onClick={() => { setOpen(false); onOpenPalette(); }} className="btn-ghost mt-8 w-full short:mt-5">
               Quick menu
             </button>
           </motion.div>

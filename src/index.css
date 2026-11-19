@@ -13,6 +13,22 @@
   body::-webkit-scrollbar {
     display: none;
   }
+  /* Scale the whole (rem-based) layout up on large monitors so it never looks tiny */
+  @media (min-width: 1800px) {
+    html {
+      font-size: 112.5%;
+    }
+  }
+  @media (min-width: 2300px) {
+    html {
+      font-size: 131.25%;
+    }
+  }
+  @media (min-width: 3200px) {
+    html {
+      font-size: 175%;
+    }
+  }
   body {
     @apply bg-ink font-sans text-fg antialiased;
     overflow-x: hidden;
@@ -57,10 +73,10 @@ html.has-cursor textarea {
     @apply mx-auto w-full max-w-site px-4 sm:px-8 lg:px-12;
   }
   .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-[0.2em] text-muted;
+    @apply font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-muted;
   }
   .chip {
-    @apply inline-flex items-center rounded-full border border-line px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-muted;
+    @apply inline-flex items-center rounded-full border border-line px-3 py-1 font-mono text-[0.6875rem] uppercase tracking-wider text-muted;
   }
   .btn {
     @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3.5 text-sm font-medium transition-colors duration-300;

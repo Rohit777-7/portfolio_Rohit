@@ -75,12 +75,12 @@ const ComposePreview = () => {
   }, [reduced]);
 
   return (
-    <span className="block overflow-hidden rounded-xl border border-white/10 bg-black/30 font-mono text-[12px]">
+    <span className="block overflow-hidden rounded-xl border border-white/10 bg-black/30 font-mono text-[0.75rem]">
       <span className="flex items-center gap-1.5 border-b border-white/[0.07] px-3.5 py-2.5">
         <span className="h-2 w-2 rounded-full bg-white/15" />
         <span className="h-2 w-2 rounded-full bg-white/15" />
         <span className="h-2 w-2 rounded-full bg-accent/70" />
-        <span className="ml-2 text-[10px] uppercase tracking-[0.18em] text-white/35">New message</span>
+        <span className="ml-2 text-[0.625rem] uppercase tracking-[0.18em] text-white/35">New message</span>
       </span>
       <span className="flex gap-3 border-b border-white/[0.07] px-3.5 py-2.5">
         <span className="w-14 shrink-0 text-white/35">To</span>
@@ -125,12 +125,12 @@ const Field = ({ label, as = "input", className = "", wrapClassName = "block", .
   const Tag = as;
   return (
     <label className={`group ${wrapClassName}`}>
-      <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.18em] text-white/50 transition-colors group-focus-within:text-accent">
+      <span className="mb-2 block font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-white/50 transition-colors group-focus-within:text-accent">
         {label}
       </span>
       <Tag
         {...props}
-        className={`w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-[15px] text-fg outline-none transition-all duration-300 placeholder:text-white/30 hover:border-white/20 focus:border-accent/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_rgba(200,255,61,0.08),0_0_30px_-8px_rgba(200,255,61,0.35)] ${className}`}
+        className={`w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-[0.9375rem] text-fg outline-none transition-all duration-300 placeholder:text-white/30 hover:border-white/20 focus:border-accent/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_rgba(200,255,61,0.08),0_0_30px_-8px_rgba(200,255,61,0.35)] ${className}`}
       />
     </label>
   );
@@ -234,7 +234,7 @@ const Contact = ({ onToast }) => {
 
       <div className="container-site relative py-20 sm:py-28">
         <Reveal className="flex items-center gap-3">
-          <span className="font-mono text-[11px] text-accent">04</span>
+          <span className="font-mono text-[0.6875rem] text-accent">04</span>
           <span className="h-px w-10 bg-line" />
           <span className="eyebrow">Contact</span>
         </Reveal>
@@ -261,7 +261,7 @@ const Contact = ({ onToast }) => {
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-accent text-ink shadow-[0_0_24px_-4px_rgba(200,255,61,0.7)]">
                   <MailIcon />
                 </span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/50">Email me</span>
+                <span className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-white/50">Email me</span>
               </span>
 
               <ComposePreview />
@@ -299,7 +299,7 @@ const Contact = ({ onToast }) => {
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
                   </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">Available</span>
+                  <span className="font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-accent">Available</span>
                 </span>
                 <span className="mt-4 block text-lg font-medium tracking-tight text-fg">Open to new work</span>
                 <span className="mt-1 block text-sm text-muted">Full-time roles & freelance projects</span>
@@ -307,7 +307,7 @@ const Contact = ({ onToast }) => {
 
               {/* Local time */}
               <GlowCard className="p-6">
-                <span className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-white/50">
+                <span className="flex items-center gap-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-white/50">
                   <ClockIcon className="h-3.5 w-3.5" />
                   Local time
                 </span>
@@ -385,7 +385,7 @@ const Contact = ({ onToast }) => {
                       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
 
                       <div>
-                        <span className="mb-2.5 block font-mono text-[11px] uppercase tracking-[0.18em] text-white/50">I'm reaching out about</span>
+                        <span className="mb-2.5 block font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-white/50">I'm reaching out about</span>
                         <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Topic">
                           {topics.map((t) => (
                             <button

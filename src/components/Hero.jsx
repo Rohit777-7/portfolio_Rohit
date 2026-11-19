@@ -75,7 +75,7 @@ const Hero = ({ ready }) => {
         </motion.div>
 
         <div className="flex flex-1 flex-col justify-center py-6 sm:py-8">
-          <motion.p {...fade(0.2)} className="mb-5 font-mono text-[11px] uppercase tracking-[0.25em] text-muted">
+          <motion.p {...fade(0.2)} className="mb-5 font-mono text-[0.6875rem] uppercase tracking-[0.25em] text-muted">
             {profile.name} — Portfolio
           </motion.p>
           <h1 className="text-[clamp(2.9rem,min(8.6vw,13vh),9rem)] font-medium leading-[0.9] tracking-tightest">
@@ -88,7 +88,7 @@ const Hero = ({ ready }) => {
         </div>
 
         <div className="grid gap-8 border-t border-line pt-7 md:grid-cols-12 md:items-end">
-          <motion.p {...fade(0.75)} className="max-w-md text-[15px] leading-relaxed text-muted md:col-span-5">
+          <motion.p {...fade(0.75)} className="max-w-md text-[0.9375rem] leading-relaxed text-muted md:col-span-5">
             Creative frontend & <span className="text-fg">MERN stack developer</span> with {profile.mernYears}+ years
             of hands-on experience. I turn ideas into fast, motion-rich products, from cinematic real-estate launches
             to real-time apps.
@@ -120,12 +120,12 @@ const Hero = ({ ready }) => {
 
         <motion.div
           {...fade(1.05)}
-          className="mt-7 flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-muted"
+          className="mt-7 flex items-center justify-between font-mono text-[0.6875rem] uppercase tracking-wider text-muted"
         >
           <span>
             {profile.location} · {time} IST
           </span>
-          <button onClick={() => scrollToId("about")} className="hidden items-center gap-2 transition-colors hover:text-fg sm:flex">
+          <button onClick={() => scrollToId("about")} className="-my-2 hidden min-h-[2rem] items-center gap-2 py-2 transition-colors hover:text-fg sm:flex">
             Scroll to explore
             <motion.span animate={reduced ? {} : { y: [0, 4, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
               ↓
@@ -133,7 +133,7 @@ const Hero = ({ ready }) => {
           </button>
           <span className="flex gap-4">
             {socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="transition-colors hover:text-fg">
+              <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="-my-2 inline-flex min-h-[2rem] items-center py-2 transition-colors hover:text-fg">
                 {s.label} ↗
               </a>
             ))}

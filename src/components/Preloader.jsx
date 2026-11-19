@@ -449,7 +449,7 @@ const Preloader = ({ onDone }) => {
       <canvas ref={canvasRef} className="absolute inset-0" />
 
       {/* Corner labels */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted sm:p-10 sm:text-[11px]">
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-5 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted sm:p-10 sm:text-[0.6875rem]">
         <div className="flex justify-between gap-4">
           <motion.span {...fade(0.1)} className="text-fg">
             {profile.name}
