@@ -79,6 +79,7 @@ const Hero = ({ ready }) => {
             {profile.name} — Portfolio
           </motion.p>
           <h1 className="text-[clamp(2.9rem,min(8.6vw,13vh),9rem)] font-medium leading-[0.9] tracking-tightest">
+            <span className="sr-only">{profile.name}, creative frontend &amp; MERN stack developer: </span>
             <SplitWords text="I build web" animate={ready} delay={0.2} />
             <br />
             <SplitWords text="experiences that" animate={ready} delay={0.32} />

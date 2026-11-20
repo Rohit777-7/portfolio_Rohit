@@ -46,12 +46,12 @@ const Footer = () => {
       </div>
 
       <div className="container-site overflow-hidden">
-        <p
+        {/* Purely decorative: drawn with CSS content so it is not treated as page text */}
+        <div
           aria-hidden
-          className="select-none whitespace-nowrap text-center text-[min(14.5vw,13rem)] font-semibold leading-[0.8] tracking-tightest text-white/[0.04]"
-        >
-          {profile.firstName.toUpperCase()} YADAV
-        </p>
+          data-text={`${profile.firstName.toUpperCase()} YADAV`}
+          className="select-none whitespace-nowrap text-center text-[min(14.5vw,13rem)] font-semibold leading-[0.8] tracking-tightest text-white/[0.04] before:content-[attr(data-text)]"
+        />
       </div>
 
       <div className="container-site flex flex-col items-center justify-between gap-3 border-t border-line py-6 font-mono text-[0.6875rem] uppercase tracking-wider text-muted sm:flex-row">

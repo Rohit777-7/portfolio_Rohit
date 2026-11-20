@@ -59,6 +59,8 @@ const Preview = ({ project }) => {
             <img
               src={project.image}
               alt={`${project.title} homepage`}
+              width={1440}
+              height={900}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"

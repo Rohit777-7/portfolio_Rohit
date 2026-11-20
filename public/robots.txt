@@ -1,0 +1,6 @@
+# Rohitkumar Yadav — Portfolio
+# All crawlers are welcome to index the whole site.
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-rohit-yadav.vercel.app/sitemap.xml

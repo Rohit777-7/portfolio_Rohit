@@ -32,10 +32,9 @@ export const SplitWords = ({ text, className = "", delay = 0, stagger = 0.06, an
       initial="hidden"
       {...trigger}
       transition={{ staggerChildren: stagger, delayChildren: delay }}
-      aria-label={text}
     >
       {words.map((w, i) => (
-        <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.12em] align-top">
+        <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-top">
           <motion.span
             className="inline-block will-change-transform"
             variants={{
