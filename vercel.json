@@ -1,20 +1,109 @@
 {
+  "redirects": [
+    {
+      "source": "/resume",
+      "destination": "/Rohitkumar-Yadav-Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/cv",
+      "destination": "/Rohitkumar-Yadav-Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/bookstore",
+      "destination": "https://bookstore-application-2026.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/book-store",
+      "destination": "https://bookstore-application-2026.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/rideflow",
+      "destination": "https://smart-ride-rohit.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/ride-flow",
+      "destination": "https://smart-ride-rohit.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/shifra",
+      "destination": "https://ai-agent-rohit.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/shifra-ai",
+      "destination": "https://ai-agent-rohit.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/sixty3",
+      "destination": "https://sixty3-brainwing.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/endgame",
+      "destination": "https://jp-infra-brainwing.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/jp-infra",
+      "destination": "https://jp-infra-brainwing.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/Rohit777-7",
+      "permanent": false
+    },
+    {
+      "source": "/linkedin",
+      "destination": "https://www.linkedin.com/in/rohitkumar-yadav7",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/(og-image.jpg|icon-192.png|icon-512.png|icon-maskable-512.png|apple-touch-icon.png|logo.svg)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(self), geolocation=()"
+        }
       ]
     }
   ]

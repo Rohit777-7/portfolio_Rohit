@@ -12,7 +12,8 @@ import Experience from "./components/Experience";
 import Works from "./components/Works";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import { destroyLenis, initLenis, startScroll, stopScroll } from "./lib/scroll";
+import GuidedTour from "./components/GuidedTour";
+import { destroyLenis, initLenis, scrollToId, startScroll, stopScroll } from "./lib/scroll";
 
 const prefersReduced = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -41,6 +42,8 @@ const App = () => {
   useEffect(() => {
     if (loading) stopScroll();
     else startScroll();
+    // Lets CSS hide floating extras (the AI assistant button) while the intro plays
+    document.documentElement.classList.toggle("intro-active", loading);
   }, [loading]);
 
   const onIntroDone = useCallback(() => {
@@ -50,6 +53,44 @@ const App = () => {
     } catch {}
     setTimeout(() => setLoading(false), 1500);
   }, []);
+
+  // Deep links (also used by the AI assistant's voice navigation):
+  //   /#tour              → start the guided tour
+  //   /#project-<slug>    → scroll to that project card and highlight it
+  //   /#about, /#work…    → smooth-scroll to the section
+  // The hash is cleared afterwards so asking for the same thing again still works.
+  useEffect(() => {
+    if (!ready) return;
+    const clearHash = () => history.replaceState(null, "", window.location.pathname + window.location.search);
+    let pending;
+    const handle = () => {
+      // Wait a moment so the smooth-scroll library registers the browser's own anchor jump first
+      clearTimeout(pending);
+      pending = setTimeout(act, 60);
+    };
+    const act = () => {
+      const target = decodeURIComponent(window.location.hash.slice(1));
+      if (!target) return;
+      if (target === "tour") {
+        clearHash();
+        window.dispatchEvent(new Event("portfolio:tour"));
+      } else if (target.startsWith("project-")) {
+        clearHash();
+        window.dispatchEvent(new CustomEvent("portfolio:project", { detail: target.slice(8) }));
+      } else if (document.getElementById(target)) {
+        clearHash();
+        scrollToId(target);
+      }
+    };
+    // Let the hero finish appearing before acting on a link the page opened with
+    const first = setTimeout(handle, 500);
+    window.addEventListener("hashchange", handle);
+    return () => {
+      clearTimeout(first);
+      clearTimeout(pending);
+      window.removeEventListener("hashchange", handle);
+    };
+  }, [ready]);
 
   const showToast = useCallback((msg) => {
     setToast(msg);
@@ -65,6 +106,7 @@ const App = () => {
 
       <Navbar onOpenPalette={() => setPaletteOpen(true)} />
       <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} onToast={showToast} />
+      <GuidedTour />
 
       <main>
         <Hero ready={ready} />

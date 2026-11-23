@@ -1,7 +1,8 @@
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import { projects } from "../constants";
 import { useFinePointer } from "../lib/hooks";
+import { scrollToId } from "../lib/scroll";
 import { Reveal, SectionHeading } from "./ui/Reveal";
 
 const filters = [
@@ -76,18 +77,38 @@ const Preview = ({ project }) => {
   );
 };
 
-const ProjectRow = forwardRef(({ project, index }, ref) => {
+const ProjectRow = forwardRef(({ project, index, highlighted }, ref) => {
   const flip = index % 2 === 1;
   return (
     <motion.article
       ref={ref}
+      id={`project-${project.slug}`}
       layout
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="grid items-center gap-8 border-t border-line pt-10 short:grid-cols-12 short:gap-8 lg:grid-cols-12 lg:gap-14"
+      className="relative grid items-center gap-8 border-t border-line pt-10 short:grid-cols-12 short:gap-8 lg:grid-cols-12 lg:gap-14"
     >
+      {/* Lime frame when this project is asked for ("show bookstore") */}
+      <AnimatePresence>
+        {highlighted && (
+          <motion.div
+            key="highlight"
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-3 -bottom-5 top-4 rounded-[1.75rem] border border-accent/70 sm:-inset-x-6 sm:-bottom-6"
+            style={{ boxShadow: "0 0 0 4px rgba(200,255,61,0.08), 0 0 100px -24px rgba(200,255,61,0.6)" }}
+            initial={{ opacity: 0, scale: 0.985 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.8 } }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="absolute -top-3.5 left-5 rounded-full bg-accent px-3 py-1 font-mono text-[0.6875rem] uppercase tracking-wider text-ink shadow-[0_0_24px_-4px_rgba(200,255,61,0.8)]">
+              Here it is
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className={`short:col-span-6 lg:col-span-7 ${flip ? "short:order-2 lg:order-2" : ""}`}>
         <Preview project={project} />
       </div>
@@ -141,7 +162,30 @@ ProjectRow.displayName = "ProjectRow";
 
 const Works = () => {
   const [filter, setFilter] = useState("all");
+  const [highlight, setHighlight] = useState(null); // { slug, at }
   const list = projects.filter((p) => filter === "all" || p.kind === filter);
+
+  // "show bookstore" etc. (from the assistant or a /#project-<slug> link)
+  useEffect(() => {
+    const onProject = (e) => {
+      const slug = e.detail;
+      if (!projects.some((p) => p.slug === slug)) return;
+      setFilter("all");
+      setHighlight({ slug, at: Date.now() });
+    };
+    window.addEventListener("portfolio:project", onProject);
+    return () => window.removeEventListener("portfolio:project", onProject);
+  }, []);
+
+  useEffect(() => {
+    if (!highlight) return;
+    const scroll = setTimeout(() => scrollToId(`project-${highlight.slug}`, -110), 120);
+    const clear = setTimeout(() => setHighlight(null), 4200);
+    return () => {
+      clearTimeout(scroll);
+      clearTimeout(clear);
+    };
+  }, [highlight]);
 
   return (
     <section id="work" className="container-site py-20 sm:py-28">
@@ -178,7 +222,7 @@ const Works = () => {
       <motion.div layout className="mt-16 space-y-20 sm:space-y-28">
         <AnimatePresence mode="popLayout" initial={false}>
           {list.map((p, i) => (
-            <ProjectRow key={p.slug} project={p} index={i} />
+            <ProjectRow key={p.slug} project={p} index={i} highlighted={highlight?.slug === p.slug} />
           ))}
         </AnimatePresence>
       </motion.div>

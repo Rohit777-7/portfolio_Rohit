@@ -2,6 +2,7 @@ import sixty3 from "../assets/projects/sixty3.jpg";
 import jpInfra from "../assets/projects/jp-infra.jpg";
 import rideflow from "../assets/projects/rideflow.jpg";
 import bookstore from "../assets/projects/bookstore.jpg";
+import shifra from "../assets/projects/shifra.jpg";
 
 // ─────────────────────────────────────────────────────────────
 //  Everything on the site is driven from this file.
@@ -20,10 +21,9 @@ export const profile = {
   mernYears: 2,
   heroStats: [
     { value: "2+", label: "Years MERN" },
-    { value: "4", label: "Live projects" },
+    { value: "5", label: "Live projects" },
   ],
-  // Optional: drop a PDF into /public and set e.g. "/Rohitkumar-Yadav-Resume.pdf"
-  resume: "",
+  resume: "/Rohitkumar-Yadav-Resume.pdf", // lives in /public
 };
 
 export const socials = [
@@ -41,7 +41,7 @@ export const navLinks = [
 export const stats = [
   { value: 2, suffix: "+", label: "Years hands-on with the MERN stack" },
   { value: 4, suffix: "+", label: "Months building in production" },
-  { value: 4, suffix: "", label: "Live projects shipped" },
+  { value: 5, suffix: "", label: "Live projects shipped" },
   { value: 2, suffix: "", label: "Real-estate client launches" },
 ];
 
@@ -60,6 +60,8 @@ export const stack = [
   "MongoDB",
   "REST APIs",
   "Socket.IO",
+  "Gemini AI",
+  "Firebase",
   "MapLibre",
   "Figma",
   "Git",
@@ -113,12 +115,13 @@ export const experiences = [
     summary:
       "Building complete web apps end to end with MongoDB, Express, React and Node.js, from database design and APIs to polished, responsive frontends.",
     points: [
+      "Built Shifra AI, a SaaS platform for embeddable voice assistants with a Firebase backend: Google sign-in, an assistant builder, Gemini-powered replies and Razorpay billing.",
       "Built RideFlow, a real-time ride-booking platform with separate rider and driver apps kept in sync over WebSockets.",
       "Built a full bookstore with catalogue, search, wishlist, cart and orders backed by MongoDB.",
       "Designed REST APIs with Node and Express, including authentication and role-based flows.",
       "Deployed and maintained apps on Vercel with a focus on clean, reusable code.",
     ],
-    stack: ["MongoDB", "Express", "React", "Node.js", "Socket.IO", "Next.js"],
+    stack: ["MongoDB", "Express", "React", "Node.js", "Socket.IO", "Next.js", "Firebase", "Gemini AI"],
   },
 ];
 
@@ -150,6 +153,21 @@ export const projects = [
     image: jpInfra,
     live: "https://jp-infra-brainwing.vercel.app/",
     accent: "#e8c9a0",
+  },
+  {
+    slug: "shifra",
+    title: "Shifra AI",
+    kind: "personal",
+    client: "Personal project · SaaS",
+    year: "2026",
+    blurb:
+      "A platform for adding AI voice assistants to any website. Owners sign in with Google, set up their assistant's business details, voice and theme, then paste one script tag. Visitors talk to it out loud, get answers from Gemini and move around the site by voice.",
+    highlights: ["Real-time voice conversations", "Voice navigation (“go to pricing”)", "One-line embed · 8 themes · Razorpay billing"],
+    tags: ["React", "Firebase", "Gemini API", "Web Speech API", "Razorpay"],
+    image: shifra,
+    live: "https://ai-agent-rohit.vercel.app/",
+    code: "",
+    accent: "#c8a46e",
   },
   {
     slug: "rideflow",

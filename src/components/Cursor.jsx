@@ -27,6 +27,12 @@ const Cursor = () => {
     const move = (e) => {
       pos.x = e.clientX;
       pos.y = e.clientY;
+      // Embedded widgets (the AI assistant) sit above the custom cursor's layer,
+      // so hand over to the normal system cursor while the pointer is on them.
+      if (e.target.closest?.(".shifra-popup, .shifra-btn")) {
+        setHidden(true);
+        return;
+      }
       setHidden(false);
       const target = e.target.closest?.("[data-cursor], a, button, [role='button'], input, textarea");
       setLabel(target?.dataset?.cursor || "");

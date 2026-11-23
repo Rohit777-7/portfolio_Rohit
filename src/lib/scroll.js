@@ -33,13 +33,16 @@ export function startScroll() {
 }
 
 /** Scroll to a section id (or "top"), using Lenis when available. */
-export function scrollToId(id) {
+export function scrollToId(id, offset = -24) {
   if (id === "top") {
     lenis ? lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: "smooth" });
     return;
   }
   const el = document.getElementById(id);
   if (!el) return;
-  if (lenis) lenis.scrollTo(el, { offset: -24 });
-  else el.scrollIntoView({ behavior: "smooth", block: "start" });
+  // Absolute position from the real scroll offset, so it stays correct even
+  // right after the browser jumped to an anchor on its own.
+  const top = Math.max(0, el.getBoundingClientRect().top + window.scrollY + offset);
+  if (lenis) lenis.scrollTo(top);
+  else window.scrollTo({ top, behavior: "smooth" });
 }

@@ -133,6 +133,72 @@ html.has-cursor textarea {
   }
 }
 
+/* ── Shifra AI assistant (embedded widget): match the site's look ── */
+/* The custom cursor hides the system one; bring it back on the assistant */
+html.has-cursor .shifra-btn,
+html.has-cursor .shifra-popup,
+html.has-cursor .shifra-popup button {
+  cursor: pointer !important;
+}
+html.has-cursor .shifra-popup {
+  cursor: default !important;
+}
+html.has-cursor .shifra-popup input,
+html.has-cursor .shifra-popup textarea {
+  cursor: text !important;
+}
+html.intro-active .shifra-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+button.shifra-btn.shifra-btn {
+  right: 20px;
+  bottom: 20px;
+  width: 58px;
+  height: 58px;
+  background: #0e0e10 !important;
+  border: 1px solid rgba(200, 255, 61, 0.45) !important;
+  box-shadow: 0 10px 40px -10px rgba(200, 255, 61, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+  opacity: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease, border-color 0.3s ease;
+}
+button.shifra-btn.shifra-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  border-color: rgba(200, 255, 61, 0.8) !important;
+  box-shadow: 0 14px 48px -10px rgba(200, 255, 61, 0.75) !important;
+}
+button.shifra-btn.shifra-btn .shifra-btn-mark {
+  inset: -1px;
+  background: transparent !important;
+  border: 1px solid rgba(200, 255, 61, 0.6);
+  animation: shifra-ping 2.6s ease-out infinite;
+}
+button.shifra-btn.shifra-btn img {
+  display: none;
+}
+button.shifra-btn.shifra-btn::after {
+  content: "";
+  position: relative;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  background: #c8ff3d;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='3' width='6' height='11' rx='3'/%3E%3Cpath d='M5 11a7 7 0 0 0 14 0M12 18v3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='3' width='6' height='11' rx='3'/%3E%3Cpath d='M5 11a7 7 0 0 0 14 0M12 18v3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+@keyframes shifra-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(1.45); opacity: 0; }
+}
+@media (max-width: 640px) {
+  button.shifra-btn.shifra-btn {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+}
+
 /* Marquee */
 .marquee-track {
   animation: marquee 38s linear infinite;

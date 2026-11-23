@@ -121,7 +121,7 @@ const Hero = ({ ready }) => {
 
         <motion.div
           {...fade(1.05)}
-          className="mt-7 flex items-center justify-between font-mono text-[0.6875rem] uppercase tracking-wider text-muted"
+          className="mt-7 flex items-center justify-between pr-16 font-mono text-[0.6875rem] uppercase tracking-wider text-muted sm:pr-0"
         >
           <span>
             {profile.location} · {time} IST

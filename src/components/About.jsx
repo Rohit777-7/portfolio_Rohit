@@ -65,8 +65,9 @@ const About = () => (
         </p>
         <p>
           Before that, I spent <span className="text-fg">2+ years hands-on with the MERN stack</span>,
-          building full products end to end. RideFlow, a real-time ride-booking platform, and a Next.js
-          bookstore are both live. Lately I'm going deeper into WebGL and scroll-driven animation.
+          building full products end to end: Shifra AI, a voice-assistant SaaS powered by Gemini; RideFlow, a
+          real-time ride-booking platform; and a Next.js bookstore, all live. Lately I'm going deeper into WebGL,
+          AI interfaces and scroll-driven animation.
         </p>
       </Reveal>
     </div>

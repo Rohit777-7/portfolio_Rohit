@@ -13,11 +13,17 @@ const CommandPalette = ({ open, setOpen, onToast }) => {
     const all = [
       ...navLinks.map((l) => ({ group: "Navigate", label: `Go to ${l.title}`, run: () => scrollToId(l.id) })),
       { group: "Navigate", label: "Back to top", run: () => scrollToId("top") },
+      { group: "Navigate", label: "Take the guided tour", hint: "AI", run: () => window.dispatchEvent(new Event("portfolio:tour")) },
       ...projects.map((p) => ({
         group: "Projects",
         label: `Open ${p.title}`,
         hint: p.kind === "client" ? "Client" : "Personal",
         run: () => window.open(p.live, "_blank", "noopener"),
+      })),
+      ...projects.map((p) => ({
+        group: "Projects",
+        label: `Show ${p.title} on this page`,
+        run: () => window.dispatchEvent(new CustomEvent("portfolio:project", { detail: p.slug })),
       })),
       {
         group: "Contact",
@@ -36,7 +42,7 @@ const CommandPalette = ({ open, setOpen, onToast }) => {
       ...socials.map((s) => ({ group: "Social", label: `Open ${s.label}`, run: () => window.open(s.href, "_blank", "noopener") })),
     ];
     if (profile.resume) {
-      all.push({ group: "Contact", label: "Download résumé", run: () => window.open(profile.resume, "_blank") });
+      all.push({ group: "Contact", label: "Download résumé", hint: "PDF", run: () => window.open(profile.resume, "_blank", "noopener") });
     }
     const q = query.trim().toLowerCase();
     return q ? all.filter((i) => `${i.label} ${i.group} ${i.hint || ""}`.toLowerCase().includes(q)) : all;

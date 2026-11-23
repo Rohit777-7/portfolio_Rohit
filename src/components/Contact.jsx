@@ -23,6 +23,21 @@ const MailIcon = (p) => <Icon {...p} d={<><rect x="3" y="5" width="18" height="1
 const CopyIcon = (p) => <Icon {...p} d={<><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></>} />;
 const ClockIcon = (p) => <Icon {...p} d={<><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></>} />;
 const ArrowIcon = (p) => <Icon {...p} d={<path d="M7 17 17 7M9 7h8v8" />} />;
+const DownloadIcon = (p) => <Icon {...p} d={<><path d="M12 4v11" /><path d="m7 10 5 5 5-5" /><path d="M5 20h14" /></>} />;
+
+/** Download link for the résumé PDF (saves with a clean file name). */
+const ResumeButton = ({ className = "" }) =>
+  profile.resume ? (
+    <a
+      href={profile.resume}
+      download="Rohitkumar-Yadav-Resume.pdf"
+      data-cursor="PDF"
+      className={`group inline-flex shrink-0 items-center gap-2 rounded-full border border-accent/40 bg-accent/[0.08] px-4 py-2.5 text-sm font-medium text-accent transition-colors hover:border-accent hover:bg-accent hover:text-ink ${className}`}
+    >
+      <DownloadIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+      Download résumé
+    </a>
+  ) : null;
 const LinkedinIcon = ({ className = "h-4 w-4" }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
     <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
@@ -340,14 +355,6 @@ const Contact = ({ onToast }) => {
                   </span>
                 </GlowCard>
               ))}
-              {profile.resume && (
-                <GlowCard as="a" href={profile.resume} target="_blank" rel="noreferrer" className="flex-1 px-5 py-4">
-                  <span className="flex items-center justify-between gap-4 text-sm font-medium text-fg">
-                    Résumé
-                    <ArrowIcon className="h-4 w-4 rotate-90 text-muted transition-colors group-hover:text-accent" />
-                  </span>
-                </GlowCard>
-              )}
             </div>
           </Reveal>
 
@@ -369,17 +376,23 @@ const Contact = ({ onToast }) => {
                       </span>
                       <h3 className="mt-6 text-3xl font-medium tracking-tight">Message sent.</h3>
                       <p className="mt-2 text-muted">Thanks for reaching out. I'll get back to you within a day.</p>
-                      <button onClick={() => setStatus("idle")} className="btn-ghost mt-8">
-                        Send another
-                      </button>
+                      <div className="mt-8 flex flex-wrap gap-3">
+                        <button onClick={() => setStatus("idle")} className="btn-ghost">
+                          Send another
+                        </button>
+                        <ResumeButton className="!py-3.5" />
+                      </div>
                     </motion.div>
                   ) : (
                     <motion.form key="form" onSubmit={submit} className="flex h-full flex-col gap-6" exit={{ opacity: 0 }} noValidate>
-                      <div>
-                        <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
-                          Send a <span className="serif-accent text-accent">message</span>
-                        </h3>
-                        <p className="mt-2 text-sm text-muted">Tell me a little about it. I read every message.</p>
+                      <div className="flex flex-wrap items-start justify-between gap-4">
+                        <div>
+                          <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
+                            Send a <span className="serif-accent text-accent">message</span>
+                          </h3>
+                          <p className="mt-2 text-sm text-muted">Tell me a little about it. I read every message.</p>
+                        </div>
+                        <ResumeButton />
                       </div>
 
                       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
