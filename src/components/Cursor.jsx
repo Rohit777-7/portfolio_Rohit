@@ -29,7 +29,8 @@ const Cursor = () => {
       pos.y = e.clientY;
       // Embedded widgets (the AI assistant) sit above the custom cursor's layer,
       // so hand over to the normal system cursor while the pointer is on them.
-      if (e.target.closest?.(".shifra-popup, .shifra-btn")) {
+      // (The widget lives in a Shadow DOM, so events report its host element.)
+      if (e.target.closest?.("#shifra-assistant-root, .shifra-popup, .shifra-btn")) {
         setHidden(true);
         return;
       }
